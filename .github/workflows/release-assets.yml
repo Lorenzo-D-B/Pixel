@@ -1,0 +1,74 @@
+name: Release userscript asset
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag (leave empty to use the latest release)
+        required: false
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/release-assets.yml
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Resolve the existing release
+        id: release
+        env:
+          REQUESTED_TAG: ${{ inputs.tag || github.event.release.tag_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="$REQUESTED_TAG"
+          if [ -z "$tag" ]; then
+            tag="$(gh release view --json tagName --jq .tagName)"
+          fi
+          if [[ ! "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.-]+)?$ ]]; then
+            echo 'Expected a version tag such as v0.1.0' >&2
+            exit 1
+          fi
+          gh release view "$tag" --json tagName --jq .tagName
+          printf 'tag=%s\n' "$tag" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ steps.release.outputs.tag }}
+          persist-credentials: false
+      - name: Verify and upload the versioned userscript
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check pixel-guard.user.js
+          version="$(sed -n 's|^// @version[[:space:]]*||p' pixel-guard.user.js)"
+          if [ "$RELEASE_TAG" != "v$version" ]; then
+            echo 'Userscript version does not match the release tag' >&2
+            exit 1
+          fi
+          exists="$(gh release view "$RELEASE_TAG" --json assets --jq 'any(.assets[]; .name == "pixel-guard.user.js")')"
+          if [ "$exists" = true ]; then
+            existing_dir="$RUNNER_TEMP/pixel-guard-existing"
+            mkdir -p "$existing_dir"
+            gh release download "$RELEASE_TAG" --pattern pixel-guard.user.js --dir "$existing_dir"
+            cmp pixel-guard.user.js "$existing_dir/pixel-guard.user.js"
+            echo 'The identical userscript asset is already present.'
+          else
+            gh release upload "$RELEASE_TAG" pixel-guard.user.js
+          fi
+          sha256sum pixel-guard.user.js
+          printf 'Userscript asset: https://github.com/%s/releases/download/%s/pixel-guard.user.js\n' "$GH_REPO" "$RELEASE_TAG" >> "$GITHUB_STEP_SUMMARY"
