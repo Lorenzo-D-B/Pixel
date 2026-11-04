@@ -1,6 +1,6 @@
-# Guida completa — Pixel Guard for Gmail
+# Guida completa — bloccare tracking pixel su Gmail con Pixel Guard
 
-Userscript **Tampermonkey**, senza server o servizi esterni, per filtrare le immagini nelle email di Gmail desktop. Il file da installare è **[pixel-guard.user.js](https://raw.githubusercontent.com/Lorenzo-D-B/Pixel/main/pixel-guard.user.js)**; npm serve soltanto a chi vuole eseguire i test. [Torna alla presentazione](../README.md).
+Userscript **Tampermonkey**, senza server o servizi esterni, per aiutare a **bloccare tracking pixel nelle email di Gmail** e ridurre il monitoraggio delle aperture tramite immagini remote. Filtra immagini piccole, nascoste o di dimensioni sconosciute, senza scaricarle per misurarle. Il file da installare è **[pixel-guard.user.js](https://raw.githubusercontent.com/Lorenzo-D-B/Pixel/main/pixel-guard.user.js)**; npm serve soltanto a chi vuole eseguire i test. [Torna alla presentazione](../README.md).
 
 ## Installazione
 

@@ -3,7 +3,7 @@
 // @namespace    https://github.com/Lorenzo-D-B/Pixel
 // @version      0.1.0
 // @author       Lorenzo-D-B
-// @description  Blocca immagini piccole o sconosciute nelle email Gmail, con sblocco manuale.
+// @description  Aiuta a bloccare tracking pixel e immagini di tracciamento su Gmail, con filtro dimensioni e sblocco manuale.
 // @homepageURL  https://github.com/Lorenzo-D-B/Pixel
 // @supportURL   https://github.com/Lorenzo-D-B/Pixel/issues
 // @downloadURL  https://raw.githubusercontent.com/Lorenzo-D-B/Pixel/main/pixel-guard.user.js

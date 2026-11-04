@@ -2,7 +2,15 @@
   "name": "pixel-guard-gmail",
   "version": "0.1.0",
   "private": true,
-  "description": "Userscript Tampermonkey per bloccare immagini di tracciamento nelle email Gmail",
+  "description": "Userscript Tampermonkey per aiutare a bloccare tracking pixel su Gmail e ridurre il tracciamento delle aperture email",
+  "keywords": [
+    "gmail",
+    "tracking-pixel",
+    "email-tracking",
+    "tampermonkey",
+    "userscript",
+    "privacy"
+  ],
   "license": "MIT",
   "author": "Lorenzo-D-B",
   "homepage": "https://github.com/Lorenzo-D-B/Pixel#readme",

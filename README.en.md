@@ -1,14 +1,20 @@
-# Pixel Guard for Gmail
+# Pixel Guard for Gmail — email tracking pixel blocker
 
-**Take control of remote images in your inbox.**
+**Help block email tracking pixels and limit email open tracking in Gmail.**
 
-A free, open-source **Tampermonkey userscript** for desktop Gmail. Filter tiny images and images with unknown dimensions, or block all recognized remote message images. Reveal individual images when you choose.
+A free, open-source **email tracking pixel blocker for Gmail**, delivered as a **Tampermonkey userscript**. Pixel Guard helps block tiny tracking images and reduce email open tracking by filtering small images and images with unknown dimensions. You can also block all recognized remote message images and reveal individual images when you choose.
 
 [**Install Pixel Guard**](https://raw.githubusercontent.com/Lorenzo-D-B/Pixel/main/pixel-guard.user.js) · [Italiano](README.md) · [Releases](https://github.com/Lorenzo-D-B/Pixel/releases)
 
 ![Simulated email with Pixel Guard's blocked-image controls](docs/images/pixel-guard.png)
 
 _The screenshot shows a local demonstration, without personal email or account data. The userscript's interface is currently in Italian._
+
+## What is an email tracking pixel?
+
+An **email tracking pixel** is an often invisible image, such as a **1×1 pixel**, embedded in a message. Requesting that image can let the sender's service record an email-open signal.
+
+Pixel Guard helps prevent these image loads through the Gmail loading paths it can intercept. It is intended for people looking to **block tracking pixels in Gmail** with Tampermonkey and control which email images may load. Large images can track too, and some requests can start before the userscript runs: combine it with Gmail's native image setting below.
 
 ## Install
 
