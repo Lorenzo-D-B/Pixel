@@ -1,0 +1,27 @@
+{
+  "name": "pixel-guard-gmail",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Userscript Tampermonkey per bloccare immagini di tracciamento nelle email Gmail",
+  "license": "MIT",
+  "author": "Lorenzo-D-B",
+  "homepage": "https://github.com/Lorenzo-D-B/Pixel#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lorenzo-D-B/Pixel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lorenzo-D-B/Pixel/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "scripts": {
+    "check": "node --check pixel-guard.user.js",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}
